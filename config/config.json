@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "todo",
+    "password": "parayaanpattoola",
+    "database": "tododb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "todo",
+    "password": "parayaanpattoola",
+    "database": "tododb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "todo",
+    "password": "parayaanpattoola",
+    "database": "tododb",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
