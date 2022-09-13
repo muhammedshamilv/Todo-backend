@@ -11,8 +11,12 @@ router.post('/register', async (req, res) => {
       email: email,
       hashedPassword: await utils.hashPassword(password),
     });
-
-    res.status(200).send(addUser);
+    let userObj = {
+      id: addUser.id,
+      user_name: addUser.user_name,
+      email: addUser.email,
+    };
+    res.status(200).send(userObj);
   } catch (error) {
     console.error(error);
   }
@@ -22,21 +26,28 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-
     const user = await User.findOne({
       where: {
         email: email,
       },
     });
     !user && res.status(404).send('User not found');
-
-    const validPassword = await utils.comparePassword(
-      password,
-      user.hashedPassword
-    );
-    !validPassword && res.status(400).send('Wrong password');
-
-    res.status(200).send(user);
+    if (user) {
+      const validPassword = await utils.comparePassword(
+        password,
+        user.hashedPassword
+      );
+      let userObj = {
+        id: user.id,
+        user_name: user.user_name,
+        email: user.email,
+      };
+      if (validPassword) {
+        return res.status(200).send(userObj);
+      } else {
+        return res.status(401).send('Wrong password');
+      }
+    }
   } catch (error) {
     console.error(error);
   }
