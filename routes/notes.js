@@ -20,7 +20,7 @@ router.post('/:id/todo/create', async (req, res) => {
   }
 });
 
-router.get('/:id/alltodos', async (req, res) => {
+router.get('/:id/all/todos', async (req, res) => {
   // try {
   //   const allTodo = await Notes.findAll({
   //     limit: 5,
@@ -48,19 +48,20 @@ router.get('/:id/alltodos', async (req, res) => {
   //   size = sizeAsNumber;
   // }
   const userId = req.params.id;
-  const size = req.query.size;
+  // const size = req.query.size;
 
   const allTodo = await Note.findAndCountAll({
     where: {
       user_id: userId,
     },
-    limit: size,
+    // limit: size,
     // offset: page * size,
     order: [['updatedAt', 'DESC']],
   });
   res.send({
-    content: allTodo.rows,
-    totalPages: Math.ceil(allTodo.count / Number.parseInt(size)),
+    content: allTodo,
+    // .rows,
+    // totalPages: Math.ceil(allTodo.count / Number.parseInt(size)),
   });
 });
 

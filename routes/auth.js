@@ -52,4 +52,10 @@ router.post('/login', async (req, res) => {
     console.error(error);
   }
 });
+
+router.get('/logout', (req, res) => {
+  res.logout();
+  res.redirect('http://localhost:3000/');
+});
+
 module.exports = router;
