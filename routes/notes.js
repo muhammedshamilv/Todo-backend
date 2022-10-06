@@ -93,9 +93,9 @@ router.put('/todos/:id/update', async (req, res) => {
     updateTodo.title = title;
     updateTodo.save();
     res.status(200).send(updateTodo);
-    res.status(400).send('Bad request');
   } catch (error) {
     console.error(error);
+    res.status(400).send('Bad request');
   }
 });
 
